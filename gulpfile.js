@@ -15,7 +15,7 @@ var src = {
 	js: {
 		all: [root + '**/*.js', root + '*.js', pub + 'js/**/*.js','server.js'],
 		pub: [pub + 'js/analytics/*.js', pub + 'js/template/*.js'],
-		pur: [pub + '/js/purchase/*.js', bower + 'jquery.payment/lib/jquery.payment.js']
+		visualize: [pub + '/js/visualize/*.js']
 	},
 	css: {
 		all: [pub + 'css/*.css']
@@ -34,7 +34,7 @@ gulp.task('build',
 );
 
 gulp.task('js',
- ['js.pub','js.pur']
+ ['js.pub','js.visualize']
 );
 
 gulp.task('lint', function() {
@@ -46,15 +46,15 @@ gulp.task('lint', function() {
 gulp.task('js.pub', function() {
 	return gulp.src(src.js.pub)
 		.pipe(uglify())
-		.pipe(concat('xl.js'))
+		.pipe(concat('d3merchants.js'))
 		.pipe(rename({suffix: '.min'}))
 		.pipe(gulp.dest('public/dist'));
 });
 
-gulp.task('js.pur', function() {
-	return gulp.src(src.js.pur)
+gulp.task('js.visualize', function() {
+	return gulp.src(src.js.visualize)
 		.pipe(uglify())
-		.pipe(concat('purchase.js'))
+		.pipe(concat('visualize.js'))
 		.pipe(rename({suffix: '.min'}))
 		.pipe(gulp.dest('public/dist'));
 });
