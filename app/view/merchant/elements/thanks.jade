@@ -1,0 +1,17 @@
+div#content
+	div(style='text-align:center;')
+		h2 Thanks! You just purchased your xltest
+		h3 Check your email for the good stuff
+		h3 Have a great time, fellow excel nerd
+		br
+		h3 Here are the details of your purchase
+		br
+		div(style='margin-left:auto; margin-right: auto; width: 70%')
+			:markdown
+				|    Item    	|  Description  	|
+				|:----------:	|:-------------:	|
+				| PurchaseId 	| #{purchaseId} 	|
+				|    Name    	|    #{name}    	|
+				|    Email   	|    #{email}   	|
+				|   Amount   	|    $#{amount}		|
+				|   Network  	|    #{network}  	|
