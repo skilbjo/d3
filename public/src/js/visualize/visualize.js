@@ -1,10 +1,13 @@
-var json_file = './../public/src/assets/data/rpHierarchy.json';
+var 
+	file_path = './../public/src/assets/data/',
+	json_file = file_path + 'rpHierarchy.json',
+	small_json = file_path + 'small.json';
 
 
 // d3 code goes here
 // remember to change the .json file to point to the variable above
 
-var diameter = 960;
+var diameter = 1280;
 
 var tree = d3.layout.tree()
     .size([360, diameter / 2 - 120])
@@ -19,7 +22,7 @@ var svg = d3.select("body").append("svg")
   .append("g")
     .attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
 
-d3.json(json_file, function(error, root) {
+d3.json(small_json, function(error, root) {
   var nodes = tree.nodes(root),
       links = tree.links(nodes);
 
