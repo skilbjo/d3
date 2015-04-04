@@ -1,16 +1,9 @@
 var csv = require('csv')
-	, args = process.argv.slice(2)
-	, inputFile = args[0]
-	, outputFile = args[1]
+	, inputFile = process.argv.slice(2)[0]
+	, outputFile = process.argv.slice(2)[1]
 	, fs = require('fs')
-	, readFileOptions = {
-		encoding: 'utf8',
-		flag: 'r'
-	}
-	, stream = fs.createReadStream(inputFile)
-	, readline = require('readline')
-	, rd = readline.createInterface({
-			input: fs.createReadStream(stream),
+	, rd = require('readline').createInterface({
+			input: fs.createReadStream(inputFile),
 			output: outputFile,
 			terminal: true
 	})
@@ -34,16 +27,6 @@ var addHierarchy = function(hierarchy, node) {
 rd.on('line', function(data) {
 	console.log(data);
 });
-
-// fs.readFile(inputFile, readFileOptions ,function(err, data) {
-// 	console.log(data);
-// });
-
-
-
-// require "csv"
-// require 'pp'
-// require 'json'
 
 
 
