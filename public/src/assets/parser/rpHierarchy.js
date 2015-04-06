@@ -6,10 +6,7 @@ var csv = require('csv')
 			input: fs.createReadStream(inputFile, {start: 43 /* skip headers */}),
 			output: process.stdout
 	})
-	, graph = [{
-		id: 1,
-		children: []
-	}];
+	, graph = [];
 
 var findIndex = function(children, nodeID) {
 	children.map(function(i) {
@@ -19,33 +16,44 @@ var findIndex = function(children, nodeID) {
 	});
 };
 
-var addHierarchy = function(hierarchyArr, companyId, node) {
+var addHierarchy = function(hierarchy, node) {
+	var id = hierarchy[hierarchy.length - 1];
+	var children;
 
-	// console.log(node);
-	if (!node.id) {
-		node.id = hierarchyArr[0];
+	hierarchy.shift();
+
+	if (hierarchy !== undefined || hierarchy.length !== 0) {
+		if (node.children === undefined || node.children.length === 0) {
+			node.children = [{}];
+			addHierarchy(hierarchy, node.children[0]);
+		}
+	} else {
+		// node.push([{
+		// 	id: id,
+		// 	children: children
+		// }]);
+		// addHierarchy(hierarchy, node);
 	}
 
-	graph.push({ id: companyId, children: 'recursive here' });
-
-	console.log(graph);
-	return graph;
-
+	// if (hierarchy !== []) {
+	// 	graph.id = hierarchy.pop();
+	// 	if ( local_result.children == [] ) {
+	// 		local_result.children = [{}];
+	// 		// addHierarchy(hierarchy, result.children[0]);
+	// 	} 
+	// }
 };
-
 
 rl.on('line', function(data) {
 	var parsedLine = s(data).parseCSV()
 		, name = parsedLine[0]
-		, companyId = parsedLine[1]
+		, id = parsedLine[1]
 		, aggregateId = parsedLine[3]
-		, splitAggregateId = aggregateId.split('|');
+		, hierarchy = aggregateId.split('|');
 
-	addHierarchy(splitAggregateId, companyId, graph);
-});
-
-
-rl.on('end', function() {
-	rl.close();
+	addHierarchy(hierarchy, graph);
+}).on('close', function() {
+	rl.close(); process.exit(0);
+	return graph;
 });
 
