@@ -6,7 +6,7 @@ var csv = require('csv')
 			input: fs.createReadStream(inputFile, {start: 43 /* skip headers */}),
 			output: process.stdout
 	})
-	, graph = [];
+	, graph = {};
 
 var findIndex = function(children, nodeID) {
 	children.map(function(i) {
@@ -16,44 +16,68 @@ var findIndex = function(children, nodeID) {
 	});
 };
 
-var addHierarchy = function(hierarchy, node) {
+var addHierarchy = function(hierarchy, graph) {
+	var parent = hierarchy[0];
 	var id = hierarchy[hierarchy.length - 1];
 	var children;
 
-	hierarchy.shift();
+	console.log(id, parent, hierarchy);
 
-	if (hierarchy !== undefined || hierarchy.length !== 0) {
-		if (node.children === undefined || node.children.length === 0) {
-			node.children = [{}];
-			addHierarchy(hierarchy, node.children[0]);
-		}
-	} else {
-		// node.push([{
-		// 	id: id,
-		// 	children: children
-		// }]);
-		// addHierarchy(hierarchy, node);
+	if (!(id in graph)) {
+		graph.id = id;
 	}
 
-	// if (hierarchy !== []) {
-	// 	graph.id = hierarchy.pop();
-	// 	if ( local_result.children == [] ) {
-	// 		local_result.children = [{}];
-	// 		// addHierarchy(hierarchy, result.children[0]);
-	// 	} 
+	graph.map(function(el, i) {
+		if (el.id === parent) {
+			return false;
+		} else {
+			graph.id === parent;
+		}
+	});
+
+
+
+	// graph.push(id);
+
+	// hierarchy.shift();
+
+	// if (hierarchy !== undefined || hierarchy.length !== 0) {
+	// 	if (node.children === undefined || node.children.length === 0) {
+	// 		node.children = [{}];
+	// 		addHierarchy(hierarchy, node.children[0]);
+	// 	}
+	// } else {
+	// 	// node.push([{
+	// 	// 	id: id,
+	// 	// 	children: children
+	// 	// }]);
+	// 	// addHierarchy(hierarchy, node);
 	// }
+
+	// // if (hierarchy !== []) {
+	// // 	graph.id = hierarchy.pop();
+	// // 	if ( local_result.children == [] ) {
+	// // 		local_result.children = [{}];
+	// // 		// addHierarchy(hierarchy, result.children[0]);
+	// // 	} 
+	// // }
 };
 
-rl.on('line', function(data) {
+rl.on('line', function(data, graph) {
 	var parsedLine = s(data).parseCSV()
 		, name = parsedLine[0]
 		, id = parsedLine[1]
 		, aggregateId = parsedLine[3]
 		, hierarchy = aggregateId.split('|');
 
+	// console.log(hierarchy);
+
 	addHierarchy(hierarchy, graph);
 }).on('close', function() {
-	rl.close(); process.exit(0);
-	return graph;
+	console.log(graph);
+	rl.close(); 
+	// process.exit(0);
+
+	// return graph;
 });
 
