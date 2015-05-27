@@ -1,84 +1,51 @@
 var csv = require('csv')
 	, s = require('string')
-	, inputFile = 'csv/heirarchy_smaller.csv' // , inputFile = process.argv.slice(2)[0] // , outputFile = process.argv.slice(2)[1]
+	, inputFile = 'csv/Merchant_Heirarchy.csv' // , inputFile = process.argv.slice(2)[0] // , outputFile = process.argv.slice(2)[1]
 	, fs = require('fs')
 	, _ = require('underscore')
 	, rl = require('readline').createInterface({
 			input: fs.createReadStream(inputFile, {start: 43 /* skip headers */}),
 			output: process.stdout
 	})
-	, graph = [];
+	, tree = [];
 
-var containsObject = function(obj, list) {
-  for (var i = 0; i < list.length; i++) {
-		if (list[i] === obj) {
-		  return true;
-		}
-  }
-  return false;
-};
-
-var findIndex = function(children, id) {
-	console.log('sup');
-	return children.some(function(el, i) {
-		if (el.id === id) {
-			return i;
-		} else {
-			return false;
-		}
-	});
-};
-
-var checkId = function(id, node) {
-	return node.some(function(el) {
-		return el.id === id;
-	});
-};
-
-var addHierarchy = function(hierarchy, node) {
-	if ( !node || !node.hasOwnProperty('id') ) { 
-		node = {
-			id: hierarchy[0]
-		};
-	}
-
-	var children;
-	hierarchy.shift();
-
-	if ( (hierarchy.length !== 0) ) {
-
-		if ( !node.hasOwnProperty('children') ) {
-			node.children = [{}];
-			addHierarchy(hierarchy, node.children[0]);
-		} else if ( node.children.length !== 0) {
-			index = findIndex(node.children, hierarchy[0]);
-
-			if (index) {
-				addHierarchy(hierarchy, node.children[index]);
-			} else {
-				node.children.push({});
-				addHierarchy(hierarchy, node.children[node.children.length - 1]);
+var addHierarchy = function(aggregateId,name) {
+	if (aggregateId) {
+		var arr = aggregateId.split('|'),
+			childId = aggregateId.split('|').reverse()[0];
+		arr.reduce(function(children, id) {
+			var node, i;
+			for (i = 0; i < children.length; i++) {
+				if (children[i].id == id) {
+					node = children[i];
+					break;
+				}
 			}
-		}
-		// // level 2
-		// if (!checkId(node.id, graph)) {
-		// 	graph.push(node);
-		// 	addHierarchy(hierarchy, node.children);
-		// }
+				if (!node) {
+					children.push(node = {
+					id: id,
+					children: []
+				});
+			}
+			if (node.id == childId) {
+				node.name = name;
+			}
+			return node.children;
+		}, tree);
 	}
 };
 
-rl.on('line', function(data, graph) {
+
+rl.on('line', function(data) {
 	var parsedLine = s(data).parseCSV()
 		, name = parsedLine[0]
 		, id = parsedLine[1]
 		, aggregateId = parsedLine[3]
-		, hierarchy = aggregateId.split('|')
 		;
 
-	addHierarchy(hierarchy, graph);
+	addHierarchy(aggregateId, name);
 }).on('close', function() {
-	console.log(graph);
+	console.log(JSON.stringify(tree,null,' '));
 	rl.close(); 
 
 });
