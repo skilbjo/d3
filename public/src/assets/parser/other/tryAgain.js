@@ -1,7 +1,6 @@
 var csv = require('csv')
 	, s = require('string')
-	, inputFile = process.argv.slice(2)[0]
-	, outputFile = process.argv.slice(2)[1]
+	, inputFile = 'csv/Merchant_Heirarchy.csv' // , inputFile = process.argv.slice(2)[0] // , outputFile = process.argv.slice(2)[1]
 	, fs = require('fs')
 	, _ = require('underscore')
 	, rl = require('readline').createInterface({
@@ -9,8 +8,6 @@ var csv = require('csv')
 			output: process.stdout
 	})
 	, tree = [];
-
-if (!inputFile || !outputFile) { console.log('\nPlease use like so: node [input file path] [output file path]\n'); process.exit(1); }
 
 var addHierarchy = function(aggregateId,name) {
 	if (aggregateId) {
@@ -38,6 +35,7 @@ var addHierarchy = function(aggregateId,name) {
 	}
 };
 
+
 rl.on('line', function(data) {
 	var parsedLine = s(data).parseCSV()
 		, name = parsedLine[0]
@@ -48,10 +46,6 @@ rl.on('line', function(data) {
 	addHierarchy(aggregateId, name);
 }).on('close', function() {
 	console.log(JSON.stringify(tree,null,' '));
-	fs.writeFile(outputFile, JSON.stringify(tree,null,' '), function(err){
-		if (err) throw err;
-		console.log('It\'s saved here: ', outputFile);
-	});
 	rl.close(); 
 
 });
