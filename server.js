@@ -24,40 +24,18 @@ app.use(favicon(__dirname + '/public/src/assets/favicon/favicon.ico'));
 app.use('/public', express.static('public'));
 app.use('/bower', express.static('bower_components'));
 
-  // ssl
-// var forceSSL = function (req, res, next) {
-//   if (req.headers['x-forwarded-proto'] !== 'https') {
-//     return res.redirect(['https://', req.get('Host'), req.url].join(''));
-//   }
-//   return next();
-// };
-// if (env != 'development') { app.use(forceSSL); }
-
-  // local SSL
-// if (env == 'development') {
-//   var 
-//     https   = require('https')
-//   , fs      = require('fs')
-//   , options = { 
-//       key:  fs.readFileSync('./lib/SSL/dev/server.key')
-//     , cert: fs.readFileSync('./lib/SSL/dev/server.crt')
-//     , requestCert: false
-//     , rejectUnauthorized: false
-//     };
-// }
-
 // view template engine
 app.set('view engine', 'jade');
 app.set('views', __dirname + '/app/view');
 
 // models
-app.set('models', require('./app/model'));
+// app.set('models', require('./app/model'));
 
 // MVC Definitions =============
 // models =============
-var model = { 
-  merchants        : app.get('models').Merchants
-};
+// var model = { 
+//   merchants        : app.get('models').Merchants
+// };
 
 // controllers ========
 var controller = {
@@ -66,24 +44,19 @@ var controller = {
 };
 
 // routes =============
-require('./app/routes.js')(app
-  , model
-  , controller
+require('./app/routes.js')(
+  app,
+  // , model
+  controller
   );
 
 // launch ===================
-db.sequelize.sync({ force: true }).complete(function(err) {
-  if (err) { throw err[0] ; } else {
-    if (env == 'production') {
-      http.createServer(app).listen(app.get('port'), function(){ 
-        console.log('The magic happens on port ' + app.get('port'));
-      });
-    } else if (env == 'development') {
-      // https.createServer(options, app).listen(app.get('port'), function(){ 
-        http.createServer(app).listen(app.get('port'), function() {
-        console.log('The magic happens on port ' + app.get('port'));
-      });
-    }
-  }
-});
+// db.sequelize.sync({ force: true }).complete(function(err) {
+//   if (err) { throw err[0] ; } else {
+    // https.createServer(options, app).listen(app.get('port'), function(){ 
+      http.createServer(app).listen(app.get('port'), function() {
+      console.log('The magic happens on port ' + app.get('port'));
+    });
+//   }
+// });
 
