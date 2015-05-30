@@ -5,7 +5,6 @@ node_modules
 *env*
 *xlsx
 newrelic_agent.log
-bower_components/
 *.csr
 *.pass.key
 *.crt
