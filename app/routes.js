@@ -13,7 +13,7 @@ module.exports = function(
   app.route('/merchants')
     .get(function(req, res) { controller.merchants.new(req, res); }) ;
 
-  app.route('/merchants2')
+  app.route('/tricity')
     .get(function(req, res) { controller.merchants.new2(req, res); }) ;
 
 };
