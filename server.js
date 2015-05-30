@@ -22,6 +22,7 @@ app.use(bodyParser.json()); app.use(errorHandler()); app.use(morgan('dev'));  ap
 app.set('port', process.env.PORT || 8080);
 app.use(favicon(__dirname + '/public/src/assets/favicon/favicon.ico'));
 app.use('/public', express.static('public'));
+app.use('/parser', express.static('parser'));
 app.use('/bower', express.static('bower_components'));
 
 // view template engine

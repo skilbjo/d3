@@ -41,14 +41,13 @@ var addHierarchy = function(aggregateId,name) {
 rl.on('line', function(data) {
 	var parsedLine = s(data).parseCSV()
 		, name = parsedLine[0]
-		, id = parsedLine[1]
-		, aggregateId = parsedLine[3]
+		, aggregateId = parsedLine[2]
 		;
 
 	addHierarchy(aggregateId, name);
 }).on('close', function() {
 	console.log(JSON.stringify(tree,null,' '));
-	fs.writeFile(outputFile, JSON.stringify(tree,null,' '), function(err){
+	fs.writeFile(outputFile, JSON.stringify(tree[0],null,' '), function(err){
 		if (err) throw err;
 		console.log('It\'s saved here: ', outputFile);
 	});

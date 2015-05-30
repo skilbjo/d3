@@ -1,0 +1,368 @@
+var json = 
+ {
+  "id": "1",
+  "children": [
+   {
+    "id": "50894",
+    "children": [
+     {
+      "id": "50511",
+      "children": [
+       {
+        "id": "95021",
+        "children": [
+         {
+          "id": "50883",
+          "children": [
+           {
+            "id": "50753",
+            "children": [],
+            "name": "Tower 1"
+           },
+           {
+            "id": "50752",
+            "children": [],
+            "name": "Bell Tower 2"
+           }
+          ]
+         },
+         {
+          "id": "50734",
+          "children": [],
+          "name": "Crescent Village"
+         },
+         {
+          "id": "50886",
+          "children": [
+           {
+            "id": "50719",
+            "children": [],
+            "name": "Fairwood II"
+           },
+           {
+            "id": "50725",
+            "children": [],
+            "name": "Fairwood"
+           }
+          ]
+         },
+         {
+          "id": "50732",
+          "children": [],
+          "name": "French Court"
+         },
+         {
+          "id": "50733",
+          "children": [],
+          "name": "Imperial South"
+         },
+         {
+          "id": "50884",
+          "children": [
+           {
+            "id": "50727",
+            "children": [],
+            "name": "New Troy"
+           },
+           {
+            "id": "50746",
+            "children": [],
+            "name": "Burdett   Nyroy"
+           },
+           {
+            "id": "50731",
+            "children": [],
+            "name": "Troy Gardens Property"
+           }
+          ]
+         },
+         {
+          "id": "50723",
+          "children": [],
+          "name": "Quakertowne"
+         },
+         {
+          "id": "50737",
+          "children": [],
+          "name": "Regency Park"
+         },
+         {
+          "id": "59745",
+          "children": [],
+          "name": "Schuyler Place"
+         },
+         {
+          "id": "50745",
+          "children": [],
+          "name": "Stonehenge"
+         },
+         {
+          "id": "50739",
+          "children": [],
+          "name": "Country Club"
+         },
+         {
+          "id": "50749",
+          "children": [],
+          "name": "Court Royale"
+         },
+         {
+          "id": "50717",
+          "children": [],
+          "name": "Harmony Hill"
+         },
+         {
+          "id": "50726",
+          "children": [],
+          "name": "Menands"
+         },
+         {
+          "id": "50751",
+          "children": [],
+          "name": "Rolling Ridge"
+         },
+         {
+          "id": "50885",
+          "children": [
+           {
+            "id": "86150",
+            "children": [],
+            "name": "The Woods II"
+           },
+           {
+            "id": "50724",
+            "children": [],
+            "name": "Brunswick Apartments"
+           },
+           {
+            "id": "50736",
+            "children": [],
+            "name": "The Glen at Sugar Hill"
+           },
+           {
+            "id": "50738",
+            "children": [],
+            "name": "Sugar Hill Apartments"
+           },
+           {
+            "id": "66837",
+            "children": [],
+            "name": "Sugar Hill Storage Units"
+           },
+           {
+            "id": "50722",
+            "children": [],
+            "name": "The Woods I"
+           },
+           {
+            "id": "87545",
+            "children": [],
+            "name": "The Woods Storage Units"
+           }
+          ]
+         },
+         {
+          "id": "50728",
+          "children": [],
+          "name": "Tivoli Park"
+         },
+         {
+          "id": "50730",
+          "children": [],
+          "name": "Village Green"
+         },
+         {
+          "id": "50740",
+          "children": [],
+          "name": "Woodlake"
+         },
+         {
+          "id": "50748",
+          "children": [],
+          "name": "Armor Heights"
+         },
+         {
+          "id": "50721",
+          "children": [],
+          "name": "Capitol View"
+         },
+         {
+          "id": "50718",
+          "children": [],
+          "name": "Park Ridge"
+         },
+         {
+          "id": "50741",
+          "children": [],
+          "name": "Regency Park North"
+         },
+         {
+          "id": "50744",
+          "children": [],
+          "name": "Williamsburg"
+         },
+         {
+          "id": "50750",
+          "children": [],
+          "name": "BigTree"
+         },
+         {
+          "id": "50729",
+          "children": [],
+          "name": "Clover Park"
+         },
+         {
+          "id": "50747",
+          "children": [],
+          "name": "Hallmark"
+         },
+         {
+          "id": "50742",
+          "children": [],
+          "name": "Hampshire House"
+         },
+         {
+          "id": "50720",
+          "children": [],
+          "name": "Regency Court"
+         },
+         {
+          "id": "50735",
+          "children": [],
+          "name": "Sheridan Village"
+         }
+        ]
+       },
+       {
+        "id": "92938",
+        "children": [
+         {
+          "id": "50715",
+          "children": [],
+          "name": "Towne Towers"
+         },
+         {
+          "id": "50716",
+          "children": [],
+          "name": "Fenimore Trace"
+         },
+         {
+          "id": "50887",
+          "children": [
+           {
+            "id": "50714",
+            "children": [],
+            "name": "Towers   Building I   II"
+           },
+           {
+            "id": "50713",
+            "children": [],
+            "name": "Towers   Building III"
+           }
+          ]
+         }
+        ]
+       },
+       {
+        "id": "103067",
+        "children": [
+         {
+          "id": "50743",
+          "children": [],
+          "name": "Somerset Apartments"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "id": "27080",
+      "children": [
+       {
+        "id": "94268",
+        "children": [
+         {
+          "id": "9623",
+          "children": [],
+          "name": "Emerson Square"
+         },
+         {
+          "id": "9680",
+          "children": [],
+          "name": "1600 Elmwood Ave"
+         },
+         {
+          "id": "9669",
+          "children": [],
+          "name": "Brook Hill Village"
+         },
+         {
+          "id": "9679",
+          "children": [],
+          "name": "Woodgate Place"
+         },
+         {
+          "id": "9582",
+          "children": [],
+          "name": "1600 East Ave"
+         },
+         {
+          "id": "9725",
+          "children": [],
+          "name": "Spanish Gardens"
+         },
+         {
+          "id": "9671",
+          "children": [],
+          "name": "The Meadows Apartments"
+         }
+        ]
+       },
+       {
+        "id": "94269",
+        "children": [
+         {
+          "id": "9625",
+          "children": [],
+          "name": "Paradise Lane Apartment"
+         },
+         {
+          "id": "9624",
+          "children": [],
+          "name": "Raintree Island"
+         }
+        ]
+       },
+       {
+        "id": "59855",
+        "children": [],
+        "name": "Rustic Village Apts"
+       }
+      ]
+     },
+     {
+      "id": "118701",
+      "children": [
+       {
+        "id": "118702",
+        "children": [],
+        "name": "Northwoods Apartments"
+       },
+       {
+        "id": "118704",
+        "children": [],
+        "name": "Sandalwood Apartments"
+       },
+       {
+        "id": "118703",
+        "children": [],
+        "name": "Windgate Apartments"
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ };
+
+console.log();
