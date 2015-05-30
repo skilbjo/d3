@@ -10,7 +10,7 @@ module.exports = function(
 
 // Purchases ======================
   // RESTful API ==================
-  app.route('/tricity')
+  app.route('/merchants')
     .get(function(req, res) { controller.merchants.new(req, res); }) ;
 
   app.route('/merchants2')

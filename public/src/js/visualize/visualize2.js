@@ -1,76 +1,75 @@
 var 
-	file_path = './../public/src/assets/data/',
-	json_file = file_path + 'rpHierarchy.json',
-	small_json = file_path + 'small.json';
+  file_path = './../../parser/out/',
+  json_file = file_path + 'tricity1.json',
+  json = json_file
+  ;
 
 
 // d3 code goes here
 // remember to change the .json file to point to the variable above
-
-var m = [20, 120, 20, 120],
-    w = 1280 - m[1] - m[3],
-    h = 800 - m[0] - m[2],
-    i = 0,
+var margin = {top: 20, right: 120, bottom: 20, left: 120},
+    width = 960 - margin.right - margin.left,
+    height = 800 - margin.top - margin.bottom;
+    
+var i = 0,
+    duration = 750,
     root;
 
 var tree = d3.layout.tree()
-    .size([h, w]);
+    .size([height, width]);
 
 var diagonal = d3.svg.diagonal()
     .projection(function(d) { return [d.y, d.x]; });
 
-var vis = d3.select("#body").append("svg:svg")
-    .attr("width", w + m[1] + m[3])
-    .attr("height", h + m[0] + m[2])
-  .append("svg:g")
-    .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.right + margin.left)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-d3.json(small_json, function(json) {
-  root = json;
-  root.x0 = h / 2;
+d3.json(json, function(error, flare) {
+  root = flare;
+  root.x0 = height / 2;
   root.y0 = 0;
 
-  function toggleAll(d) {
+  function collapse(d) {
     if (d.children) {
-      d.children.forEach(toggleAll);
-      toggle(d);
+      d._children = d.children;
+      d._children.forEach(collapse);
+      d.children = null;
     }
   }
 
-  // Initialize the display to show a few nodes.
-  root.children.forEach(toggleAll);
-  toggle(root.children[1]);
-  toggle(root.children[1].children[2]);
-  toggle(root.children[9]);
-  toggle(root.children[9].children[0]);
-
+  root.children.forEach(collapse);
   update(root);
 });
 
+d3.select(self.frameElement).style("height", "800px");
+
 function update(source) {
-  var duration = d3.event && d3.event.altKey ? 5000 : 500;
 
   // Compute the new tree layout.
-  var nodes = tree.nodes(root).reverse();
+  var nodes = tree.nodes(root).reverse(),
+      links = tree.links(nodes);
 
   // Normalize for fixed-depth.
   nodes.forEach(function(d) { d.y = d.depth * 180; });
 
   // Update the nodes…
-  var node = vis.selectAll("g.node")
+  var node = svg.selectAll("g.node")
       .data(nodes, function(d) { return d.id || (d.id = ++i); });
 
   // Enter any new nodes at the parent's previous position.
-  var nodeEnter = node.enter().append("svg:g")
+  var nodeEnter = node.enter().append("g")
       .attr("class", "node")
       .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
-      .on("click", function(d) { toggle(d); update(d); });
+      .on("click", click);
 
-  nodeEnter.append("svg:circle")
+  nodeEnter.append("circle")
       .attr("r", 1e-6)
       .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
 
-  nodeEnter.append("svg:text")
+  nodeEnter.append("text")
       .attr("x", function(d) { return d.children || d._children ? -10 : 10; })
       .attr("dy", ".35em")
       .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
@@ -102,19 +101,16 @@ function update(source) {
       .style("fill-opacity", 1e-6);
 
   // Update the links…
-  var link = vis.selectAll("path.link")
-      .data(tree.links(nodes), function(d) { return d.target.id; });
+  var link = svg.selectAll("path.link")
+      .data(links, function(d) { return d.target.id; });
 
   // Enter any new links at the parent's previous position.
-  link.enter().insert("svg:path", "g")
+  link.enter().insert("path", "g")
       .attr("class", "link")
       .attr("d", function(d) {
         var o = {x: source.x0, y: source.y0};
         return diagonal({source: o, target: o});
-      })
-    .transition()
-      .duration(duration)
-      .attr("d", diagonal);
+      });
 
   // Transition links to their new position.
   link.transition()
@@ -137,8 +133,8 @@ function update(source) {
   });
 }
 
-// Toggle children.
-function toggle(d) {
+// Toggle children on click.
+function click(d) {
   if (d.children) {
     d._children = d.children;
     d.children = null;
@@ -146,4 +142,5 @@ function toggle(d) {
     d.children = d._children;
     d._children = null;
   }
+  update(d);
 }
