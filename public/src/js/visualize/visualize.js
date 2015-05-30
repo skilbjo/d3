@@ -1,7 +1,6 @@
 var 
 	file_path = './../../parser/out/',
-	json_file = file_path + 'tricity.json',
-	small_json = file_path + 'small.json',
+	json_file = file_path + 'tricity1.json',
   json = json_file
   ;
 
